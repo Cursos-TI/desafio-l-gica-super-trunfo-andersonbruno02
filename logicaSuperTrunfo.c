@@ -53,77 +53,93 @@ void lerDadosCidade(Cidade *cidade, int numeroCarta) {
     cidade->pib_per_capita = (cidade->pib * 1000000) / cidade->populacao;
 }
 
-// Função para comparar duas cartas com base em um atributo escolhido
-void compararCartas(Cidade cidade1, Cidade cidade2, int atributo) {
-    switch (atributo) {
+// Função para comparar dois atributos
+void compararDoisAtributos(Cidade cidade1, Cidade cidade2, int atributo1, int atributo2) {
+    int resultado1, resultado2;
+
+    // Comparação do primeiro atributo
+    switch (atributo1) {
         case 1: // População
-            if (cidade1.populacao > cidade2.populacao) {
-                printf("Cidade 1 tem maior população.\n");
-            } else {
-                printf("Cidade 2 tem maior população.\n");
-            }
+            resultado1 = (cidade1.populacao > cidade2.populacao) ? 1 : 0;
             break;
         case 2: // Área
-            if (cidade1.area > cidade2.area) {
-                printf("Cidade 1 tem maior área.\n");
-            } else {
-                printf("Cidade 2 tem maior área.\n");
-            }
+            resultado1 = (cidade1.area > cidade2.area) ? 1 : 0;
             break;
         case 3: // PIB
-            if (cidade1.pib > cidade2.pib) {
-                printf("Cidade 1 tem maior PIB.\n");
-            } else {
-                printf("Cidade 2 tem maior PIB.\n");
-            }
+            resultado1 = (cidade1.pib > cidade2.pib) ? 1 : 0;
             break;
         case 4: // Pontos Turísticos
-            if (cidade1.pontos_turisticos > cidade2.pontos_turisticos) {
-                printf("Cidade 1 tem mais pontos turísticos.\n");
-            } else {
-                printf("Cidade 2 tem mais pontos turísticos.\n");
-            }
+            resultado1 = (cidade1.pontos_turisticos > cidade2.pontos_turisticos) ? 1 : 0;
             break;
         case 5: // Densidade Populacional
-            if (cidade1.densidade_populacional < cidade2.densidade_populacional) {
-                printf("Cidade 1 tem menor densidade populacional.\n");
-            } else {
-                printf("Cidade 2 tem menor densidade populacional.\n");
-            }
+            resultado1 = (cidade1.densidade_populacional < cidade2.densidade_populacional) ? 1 : 0;
             break;
         case 6: // PIB per Capita
-            if (cidade1.pib_per_capita > cidade2.pib_per_capita) {
-                printf("Cidade 1 tem maior PIB per capita.\n");
-            } else {
-                printf("Cidade 2 tem maior PIB per capita.\n");
-            }
+            resultado1 = (cidade1.pib_per_capita > cidade2.pib_per_capita) ? 1 : 0;
             break;
         default:
-            printf("Atributo inválido.\n");
+            printf("Atributo 1 inválido.\n");
+            return;
+    }
+
+    // Comparação do segundo atributo
+    switch (atributo2) {
+        case 1: // População
+            resultado2 = (cidade1.populacao > cidade2.populacao) ? 1 : 0;
+            break;
+        case 2: // Área
+            resultado2 = (cidade1.area > cidade2.area) ? 1 : 0;
+            break;
+        case 3: // PIB
+            resultado2 = (cidade1.pib > cidade2.pib) ? 1 : 0;
+            break;
+        case 4: // Pontos Turísticos
+            resultado2 = (cidade1.pontos_turisticos > cidade2.pontos_turisticos) ? 1 : 0;
+            break;
+        case 5: // Densidade Populacional
+            resultado2 = (cidade1.densidade_populacional < cidade2.densidade_populacional) ? 1 : 0;
+            break;
+        case 6: // PIB per Capita
+            resultado2 = (cidade1.pib_per_capita > cidade2.pib_per_capita) ? 1 : 0;
+            break;
+        default:
+            printf("Atributo 2 inválido.\n");
+            return;
+    }
+
+    // Determinar o vencedor
+    if (resultado1 && resultado2) {
+        printf("Cidade 1 vence em ambos os atributos.\n");
+    } else if (!resultado1 && !resultado2) {
+        printf("Cidade 2 vence em ambos os atributos.\n");
+    } else {
+        printf("Empate: Cada cidade vence em um atributo.\n");
     }
 }
 
 int main() {
     Cidade cidade1, cidade2;
-    int atributo;
+    int atributo1, atributo2;
 
     // Ler os dados das duas cidades
     lerDadosCidade(&cidade1, 1);
     lerDadosCidade(&cidade2, 2);
 
     // Menu interativo
-    printf("\nEscolha o atributo para comparação:\n");
+    printf("\nEscolha dois atributos para comparação:\n");
     printf("1 - População\n");
     printf("2 - Área\n");
     printf("3 - PIB\n");
     printf("4 - Pontos Turísticos\n");
     printf("5 - Densidade Populacional\n");
     printf("6 - PIB per Capita\n");
-    printf("Digite o número do atributo: ");
-    scanf("%d", &atributo);
+    printf("Digite o número do primeiro atributo: ");
+    scanf("%d", &atributo1);
+    printf("Digite o número do segundo atributo: ");
+    scanf("%d", &atributo2);
 
-    // Comparar as cartas com base no atributo escolhido
-    compararCartas(cidade1, cidade2, atributo);
+    // Comparar as cartas com base nos atributos escolhidos
+    compararDoisAtributos(cidade1, cidade2, atributo1, atributo2);
 
     return 0;
 }

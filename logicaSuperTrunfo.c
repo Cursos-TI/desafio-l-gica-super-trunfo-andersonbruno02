@@ -1,48 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
-    Cidade cidade1, cidade2;
-
-    // Ler os dados das duas cidades
-    lerDadosCidade(&cidade1, 1);
-    lerDadosCidade(&cidade2, 2);
-
-    // Comparar as cartas
-    compararCartas(cidade1, cidade2);
-    
-    // Cadastro das Cartas:
-    // Implemente a lógica para solicitar ao usuário que insira os dados das cidades
-    // utilizando a função scanf para capturar as entradas.
-    // utilize o código do primeiro desafio
-
-    // Exemplo:
-    // printf("Digite o código da cidade: ");
-    // scanf("%s", codigo);
-    // 
-    // (Repita para cada propriedade)
-
-    // Comparação de Cartas:
-    // Desenvolva a lógica de comparação entre duas cartas.
-    // Utilize estruturas de decisão como if, if-else para comparar atributos como população, área, PIB, etc.
-
-    // Exemplo:
-    // if (populacaoA > populacaoB) {
-    //     printf("Cidade 1 tem maior população.\n");
-    // } else {
-    //     printf("Cidade 2 tem maior população.\n");
-    // }
-
-    // Exibição dos Resultados:
-    // Após realizar as comparações, exiba os resultados para o usuário.
-    // Certifique-se de que o sistema mostre claramente qual carta venceu e com base em qual atributo.
-
-    // Exemplo:
-    // printf("A cidade vencedora é: %s\n", cidadeVencedora);
-
-    return 0;
-}
-
 // Estrutura para representar uma carta de cidade
 typedef struct {
     char estado;
@@ -54,7 +12,6 @@ typedef struct {
     int pontos_turisticos;
     float densidade_populacional;
     float pib_per_capita;
-    float super_poder;
 } Cidade;
 
 // Função para ler os dados de uma cidade
@@ -94,9 +51,6 @@ void lerDadosCidade(Cidade *cidade, int numeroCarta) {
 
     // Calcula o PIB per capita
     cidade->pib_per_capita = (cidade->pib * 1000000) / cidade->populacao;
-
-    // Calcula o super poder (soma de todas as propriedades)
-    cidade->super_poder = cidade->populacao + cidade->area + cidade->pib + cidade->pib_per_capita + (1 / cidade->densidade_populacional) + cidade->pontos_turisticos;
 }
 
 // Função para comparar duas cartas
@@ -104,23 +58,57 @@ void compararCartas(Cidade cidade1, Cidade cidade2) {
     printf("\nComparando as cartas:\n");
 
     // Comparação de população
-    printf("População: Cidade 1 (%lu) vs Cidade 2 (%lu) -> %d\n", cidade1.populacao, cidade2.populacao, cidade1.populacao > cidade2.populacao);
+    if (cidade1.populacao > cidade2.populacao) {
+        printf("Cidade 1 tem maior população.\n");
+    } else {
+        printf("Cidade 2 tem maior população.\n");
+    }
 
     // Comparação de área
-    printf("Área: Cidade 1 (%.2f) vs Cidade 2 (%.2f) -> %d\n", cidade1.area, cidade2.area, cidade1.area > cidade2.area);
+    if (cidade1.area > cidade2.area) {
+        printf("Cidade 1 tem maior área.\n");
+    } else {
+        printf("Cidade 2 tem maior área.\n");
+    }
 
     // Comparação de PIB
-    printf("PIB: Cidade 1 (%.2f) vs Cidade 2 (%.2f) -> %d\n", cidade1.pib, cidade2.pib, cidade1.pib > cidade2.pib);
+    if (cidade1.pib > cidade2.pib) {
+        printf("Cidade 1 tem maior PIB.\n");
+    } else {
+        printf("Cidade 2 tem maior PIB.\n");
+    }
 
     // Comparação de pontos turísticos
-    printf("Pontos Turísticos: Cidade 1 (%d) vs Cidade 2 (%d) -> %d\n", cidade1.pontos_turisticos, cidade2.pontos_turisticos, cidade1.pontos_turisticos > cidade2.pontos_turisticos);
+    if (cidade1.pontos_turisticos > cidade2.pontos_turisticos) {
+        printf("Cidade 1 tem mais pontos turísticos.\n");
+    } else {
+        printf("Cidade 2 tem mais pontos turísticos.\n");
+    }
 
     // Comparação de densidade populacional (menor valor vence)
-    printf("Densidade Populacional: Cidade 1 (%.2f) vs Cidade 2 (%.2f) -> %d\n", cidade1.densidade_populacional, cidade2.densidade_populacional, cidade1.densidade_populacional < cidade2.densidade_populacional);
+    if (cidade1.densidade_populacional < cidade2.densidade_populacional) {
+        printf("Cidade 1 tem menor densidade populacional.\n");
+    } else {
+        printf("Cidade 2 tem menor densidade populacional.\n");
+    }
 
     // Comparação de PIB per capita
-    printf("PIB per capita: Cidade 1 (%.2f) vs Cidade 2 (%.2f) -> %d\n", cidade1.pib_per_capita, cidade2.pib_per_capita, cidade1.pib_per_capita > cidade2.pib_per_capita);
+    if (cidade1.pib_per_capita > cidade2.pib_per_capita) {
+        printf("Cidade 1 tem maior PIB per capita.\n");
+    } else {
+        printf("Cidade 2 tem maior PIB per capita.\n");
+    }
+}
 
-    // Comparação de super poder
-    printf("Super Poder: Cidade 1 (%.2f) vs Cidade 2 (%.2f) -> %d\n", cidade1.super_poder, cidade2.super_poder, cidade1.super_poder > cidade2.super_poder);
+int main() {
+    Cidade cidade1, cidade2;
+
+    // Ler os dados das duas cidades
+    lerDadosCidade(&cidade1, 1);
+    lerDadosCidade(&cidade2, 2);
+
+    // Comparar as cartas
+    compararCartas(cidade1, cidade2);
+
+    return 0;
 }
